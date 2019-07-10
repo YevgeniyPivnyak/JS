@@ -1,0 +1,11 @@
+div{
+    text-align: center;
+}
+
+#myBtn{
+    width: 300px;
+    height: 100px;
+    font-size: 40px;
+    text-transform: uppercase;
+    font-weight: bolder;
+}
