@@ -152,3 +152,41 @@ car.display();
 console.log(car);
 
 user.show();
+/////////////////////////////////
+
+function User(n) {
+    this.name = n;
+    this.age = 25;
+}
+
+var user = new User('Leha');
+var user2 = new User('petttt');
+
+console.log(user);
+
+///////////////////
+var User = {
+    pay: function () {
+        alert('payed');
+    }
+
+};
+
+function Admin (){
+    this.role = 'ADMIN';
+    this.edit = function (){
+        alert('edit');
+    }
+}
+Manager.prototype = User;
+function Manager (){
+    this.role = 'MANAGER';
+    this.resd = function (){
+        alert('resd');
+    }
+}
+
+var m1 = new Manager();
+var m2 = new Manager();
+
+console.log(m1);
