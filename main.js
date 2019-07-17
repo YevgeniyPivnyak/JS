@@ -1,9 +1,7 @@
 var arrNames = [];
-console.log(arrNames);
 
 function inputFunction(){
     let name = document.getElementById('inputForm').value;
-    console.log(name);
     arrNames.push(name);
 
     var newDiv = document.createElement('div');
