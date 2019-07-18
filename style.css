@@ -1,9 +1,27 @@
-h1{
-    background: yellow;
+.slider {
+    max-width: 450px;
+    margin: 60px auto;
+    position: relative;
 }
-.red{
-    background: red;
+
+.slider i {
+    position: absolute;
+    font-size: 100px;
+    font-weight: bold;
+    top: 40%;
+    cursor: pointer;
+    padding: 5px;
+    background: #ffffff4d;
 }
-.orange {
-    background: orange;
+
+.slider i:first-child {
+    left: 5px;
+}
+
+.slider i:last-child {
+    right: 5px;
+}
+
+img {
+    max-width: 100%;
 }

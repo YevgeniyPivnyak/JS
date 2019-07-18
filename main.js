@@ -1,29 +1,55 @@
-var data = ['slide-1.png',
-    'slide-2.png',
-    'slide-3.png',
-    'slide-4.png',
-    'slide-5.png']
+var data = ['img/slide-1.jpg',
+    'img/slide-2.jpg',
+    'img/slide-3.jpg',
+    'img/slide-4.jpg',
+    'img/slide-5.jpg'
+]
 
-function Slider(images, id) {
+function Slider(images, id, defaultIndex = 0) {
 
-    this.slideRight = function () {
-        console.log('slide Right');
-    }
-    this.slideLeft = function () {
-        console.log('slide Left');
-    }
+    this.index = defaultIndex;
+    this.length = images.length;
+
+    this.slideRight = function() {
+        this.index++;
+        if (this.index > this.length - 1) {
+            this.index = 0;
+        }
+
+        this.img.src = images[this.index];
+
+    }.bind(this);
+
+    this.slideLeft = function() {
+        this.index--;
+        if (this.index < 0) {
+            this.index = this.length - 1;
+        }
+
+        this.img.src = images[this.index];
+
+    }.bind(this);
 
 
-    this.init = function () {
+    this.init = function() {
+
+        //get element by id slider
         this.container = document.querySelector(id);
+        //create html object
         this.wrap = document.createElement('div');
         this.img = document.createElement('img');
         this.btnRight = document.createElement('i');
         this.btnLeft = document.createElement('i');
+        //set events for buttons
         this.btnRight.onclick = this.slideRight;
         this.btnLeft.onclick = this.slideLeft;
+
+        //set default image
+        this.img.src = images[this.index];
+
     }
-    this.render = function () {
+
+    this.render = function() {
         this.wrap.className = 'slider';
         this.btnLeft.innerHTML = '<';
         this.btnRight.innerHTML = '>';
@@ -31,12 +57,15 @@ function Slider(images, id) {
         this.wrap.appendChild(this.btnLeft);
         this.wrap.appendChild(this.img);
         this.wrap.appendChild(this.btnRight);
+
         this.container.appendChild(this.wrap);
     }
-    this.init();
-    this.render();
-
 }
 
 var slider = new Slider(data, '#slider');
-console.log(slider);
+slider.init();
+slider.render();
+
+var slider2 = new Slider(data, '#slider2', 3);
+slider2.init();
+slider2.render();
