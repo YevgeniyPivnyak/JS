@@ -235,3 +235,56 @@ var m1 = new Manager();
 var m2 = new Manager();
 
 console.log(m1);
+
+/////////////////////
+const users = [
+    'Vasya',
+    'Piter',
+    'Anu',
+    'Kostya',
+];
+
+const user = {
+    age: 25,
+    name: 'vasis77',
+    email: 'www@fff',
+}
+
+const { name, age, ...rest } = user;
+
+console.log(rest);
+
+
+
+
+
+/////
+var a = 5;
+
+function render(val) {
+    alert('Hi' + val);
+    return 5555;
+}
+
+function show(callback) {
+    setTimeout(function() {
+        a = 10;
+        callback(a);
+    }, 5000)
+}
+
+show(render);
+
+console.log(a);
+///
+function Constructor() {
+    this.name = 'Vassss';
+    this.view = function() {
+        alert(this.name)
+    }
+
+}
+
+var res = new Constructor();
+
+console.log(res);
