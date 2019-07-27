@@ -1,0 +1,29 @@
+body {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#navigation {
+    width: 100%;
+    margin: 15px 0;
+    background: #fba300;
+    padding: 15px;
+}
+
+#navigation span {
+    background: #fb0000;
+    padding: 5px 10px;
+    margin: 0 15px;
+    cursor: pointer;
+}
+
+#navigation span:hover {
+    background: #dac7c7;
+}
+
+#navigation input {
+    width: 50px;
+    height: 20px;
+}
