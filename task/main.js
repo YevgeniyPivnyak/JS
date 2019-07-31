@@ -5,16 +5,25 @@ var items = [
     { name: 'item-4', children: [{ name: 'child-5' }, { name: 'child-9' }] }
 ]
 
-function inputFunction() {
-    const container = document.querySelector('#container');
-    console.log(container);
-
-    for (let name of items.name) {
-        console.log(name);
-        var newLi = document.createElement('li');
-        newLi.innerHTML = name;
+  
+    items.forEach((CeateFunction) =>  {
+        const container = document.querySelector('#container');
+        let newLi = document.createElement('li'); 
         container.appendChild(newLi);
-    }
+        newLi.innerHTML = CeateFunction.name;
+        
+        let newUl = document.createElement('ul'); 
+        newLi.appendChild(newUl);
+        
+        CeateFunction.children.forEach((AddChFunction) => {
+        let chLi = document.createElement('li');
+        newUl.appendChild(chLi);
+        chLi.innerHTML = AddChFunction.name;
+        });
+    });
 
-}
-inputFunction();
+    
+
+    
+
+   
