@@ -5,16 +5,29 @@ var items = [
     { name: 'item-4', children: [{ name: 'child-5' }, { name: 'child-9' }] }
 ]
 
-function inputFunction() {
-    const container = document.querySelector('#container');
-    console.log(container);
+function fffr(item, container_id) {
+    const cont = document.querySelector(container_id);
+    for (let item of items) {
+        const { name, children } = item;
+        const li = appendItems(cont, name);
+    };
 
-    for (let name of items.name) {
-        console.log(name);
-        var newLi = document.createElement('li');
-        newLi.innerHTML = name;
-        container.appendChild(newLi);
+    if (children || children.length) {
+        const ul = document.createElement('ul');
+        li.appendChild(ul);
+
+        for (let child of children) {
+            appendItems(ul, child.name);
+        }
     }
 
 }
-inputFunction();
+
+function appendItems(container, name) {
+    const li = document.createElement('li');
+    li.innerHTML = name;
+    cont.appendChild(li);
+    return li;
+}
+
+fffr(items, '#container');
