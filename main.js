@@ -2,22 +2,40 @@ const BASE_URL = "https://api.unsplash.com/photos/";
 const CLIENT_ID = "ca5a2a324ba06f2cf8bede88a989bb6c2f5f87730032b3c6256b72888f2cc94c";
 
 const Request = {
-    baseUrl: `${BASE_URL}?client_id=${CLIENT_ID}`,
+
 
     listPhotos: function(limit, page) {
 
-        const url = `${this.baseUrl}&per_page=${limit}&page=${page}`;
+        const url = `${BASE_URL}?client_id=${CLIENT_ID}&per_page=${limit}&page=${page}`;
 
         return fetch(url).then(response => {
             return response.json();
         });
 
-    }
+    },
+    likePhoto: function(id) {
+  
+        const url = `${BASE_URL}${id}/like/?client_id=${CLIENT_ID}`;
+
+        return fetch(url, {
+            method: 'POST',
+    }).then(response => {
+            return response.json();
+        });
+
+}
 }
 
-function Img(photo) {
+function Img({
+    photo,
+    onLikeHandler,
+}) {
 
-    const { likes, update_at, urls: { thumb } } = photo;
+    const { likes, updated_at, urls: { thumb } } = photo;
+
+    const date = new Date(updated_at);
+
+    const dateStr = date.toLocaleDateString();
 
     const wrap = document.createElement('div');
     wrap.className = 'photo'
@@ -28,8 +46,12 @@ function Img(photo) {
     const like = document.createElement('span');
     like.innerHTML = likes;
 
+    like.onclick = () => {
+        onLikeHandler(photo, like);
+    };
+
     const date_at = document.createElement('i');
-    date_at.innerHTML = update_at;
+    date_at.innerHTML = dateStr;
 
     wrap.append(like);
     wrap.append(date_at);
@@ -63,6 +85,10 @@ function Gallery({
     this.input.value = this.page;
     this.select.value = this.limit;
 
+    this.onLikeHandler = (photo, like) => {
+        Request.likePhoto(photo.id);
+    }
+
     this.changePage = (e) => {
         const IS_LEFT = e.target === this.btnLeft;
         const IS_RIGHT = e.target === this.btnRight;
@@ -84,7 +110,7 @@ function Gallery({
 
         !IS_INPUT && (this.input.value = this.page);
 
-        this.renderList();
+            this.renderList();
 
     }
 
@@ -96,11 +122,13 @@ function Gallery({
     // ***** //
 
     this.renderList = () => {
+        this.container.innerHTML = '';
+
         Request.listPhotos(this.limit, this.page)
             .then(data => {
                 const photos = data.map((photo) => {
                     //  console.log(photo);
-                    return new Img(photo);
+                    return new Img({photo, onLikeHandler: this.onLikeHandler});
                 })
                 this.container.append(...photos)
                 console.log(...photos);
